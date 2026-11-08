@@ -2,10 +2,13 @@ package com.example.soundin.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.soundin.ui.screens.LoginScreen
 import com.example.soundin.ui.screens.MainScreen
+import com.example.soundin.ui.screens.PlaylistDetailScreen
 import com.example.soundin.ui.screens.RegisterScreen
 import com.example.soundin.viewmodels.UserSessionViewModel
 
@@ -52,6 +55,15 @@ fun SoundInNavGraph(
                 onNavigationToPlaylistDetail = { playlist ->
                     navController.navigate("playlistDetail/${playlist.id}")
                 }
+            )
+        }
+        composable(
+            SoundinRoutes.PLAYLIST_DETAIL,
+            arguments = listOf(navArgument("playlistId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val playlistId = backStackEntry.arguments?.getInt("playlistId") ?: 0
+            PlaylistDetailScreen(
+                onNavigateBack = { navController.popBackStack() }
             )
         }
     }

@@ -13,7 +13,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.soundin.ui.navigation.SoundinRoutes
 import com.example.soundin.ui.componets.BottomNavigationBar
-import com.example.soundin.ui.componets.BottomNavigationBar
 import com.example.soundin.ui.models.Playlist
 import com.example.soundin.viewmodels.UserSessionViewModel
 
@@ -48,7 +47,11 @@ fun MainScreen(
             startDestination = SoundinRoutes.LIBRARY,
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable(SoundinRoutes.LIBRARY) { LibraryScreen()}//(onNavigationToPlaylistDetail = onNavigationToPlaylistDetail) }
+            composable(SoundinRoutes.LIBRARY) {
+                LibraryScreen(
+                    onNavigateToPlaylistDetail = onNavigationToPlaylistDetail
+                )
+            }
             composable(SoundinRoutes.SEARCH) { SearchScreen() }
             composable(SoundinRoutes.PROFILE) {
                 ProfileScreen(
@@ -56,13 +59,7 @@ fun MainScreen(
                     onLogout = onLogout
                 )
             }
-            composable(
-                SoundinRoutes.PLAYLIST_DETAIL,
-                arguments = listOf(navArgument("playlistId") { type = NavType.IntType })
-            ) { backStackEntry ->
-                val playlistId = backStackEntry.arguments?.getInt("playlistId") ?: 0
-            }
+
         }
     }
 }
-

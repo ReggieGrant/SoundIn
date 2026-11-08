@@ -17,11 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import java.nio.file.WatchEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaylistDetailScreen(
+    playlistId: Int = 0,
     onNavigateBack: () -> Unit
 ) {
     Scaffold(
@@ -53,7 +53,7 @@ fun PlaylistDetailScreen(
             contentAlignment = Alignment.Center
         ){
             Text(
-                text = "Playlist Detail Screen -- Coming Soon",
+                text = "Playlist Detail Screen -- ID: $playlistId",
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -64,5 +64,5 @@ fun PlaylistDetailScreen(
 @Preview(showBackground = true)
 @Composable
 fun PlaylistDetailScreenPreview() {
-    PlaylistDetailScreen(onNavigateBack = {})
+    PlaylistDetailScreen(playlistId = 1, onNavigateBack = {})
 }
